@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./landingPage.css";
 import routes from "../../api/routes";
-import Film from "../../components/film/film";
+import MovieList from "../../components/Movie/MovieList";
 
-type FilmType = {
+type MovieType = {
   title: string;
   episode_id: number;
   opening_crawl: string;
@@ -21,7 +21,7 @@ type FilmType = {
 };
 
 function LandingPage() {
-  const [films, setFilms] = useState<FilmType[]>([]),
+  const [films, setFilms] = useState<MovieType[]>([]),
     [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -29,14 +29,16 @@ function LandingPage() {
   }, []);
 
   async function getFilms() {
-    routes.films().then((response: FilmType[]) => {
+    routes.films().then((response: MovieType[]) => {
       setFilms(response);
       setLoading(false);
       console.log(response);
     });
   }
 
-  const filmList = films.map((film: FilmType) => <Film film={film} />);
+  const filmList = films.map((film: MovieType) => (
+    <MovieList key={film.title} film={film} />
+  ));
 
   return <div className="App">{loading ? <h1>Loading...</h1> : filmList}</div>;
 }
