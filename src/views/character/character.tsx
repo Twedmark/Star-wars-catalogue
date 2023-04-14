@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useHref } from "react-router-dom";
 import UseCharacter from "../../hooks/UseCharacter";
 
 function Character() {
   const location = useLocation();
   const navigate = useNavigate();
+  const href = useHref("/");
+
+  console.log(href);
+  console.log(location);
 
   const { data, isLoading } = UseCharacter(
     location.pathname.split("/")[location.pathname.split("/").length - 1]
