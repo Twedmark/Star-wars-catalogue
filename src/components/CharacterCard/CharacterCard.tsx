@@ -2,14 +2,13 @@ import { useNavigate } from "react-router-dom";
 import UseCharacterUrl from "../../hooks/UseCharacterUrl";
 
 function CharacterCard(props: any) {
-  const { character } = props;
+  const { character, key } = props;
   const navigate = useNavigate();
-
-  const { data } = UseCharacterUrl(character);
+  let data = UseCharacterUrl(character).data;
 
   function handelOnClick() {
     const id = data.url.split("/")[data.url.split("/").length - 2];
-    navigate(`/character/${id}`, {
+    navigate(`character/${id}`, {
       state: character,
     });
   }

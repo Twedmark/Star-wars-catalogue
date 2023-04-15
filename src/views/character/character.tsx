@@ -1,22 +1,19 @@
-import { useLocation, useNavigate, useHref } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import UseCharacter from "../../hooks/UseCharacter";
 
 function Character() {
-  const location = useLocation();
   const navigate = useNavigate();
-  const href = useHref("/");
-
-  console.log(href);
-  console.log(location);
-
-  const { data, isLoading } = UseCharacter(
-    location.pathname.split("/")[location.pathname.split("/").length - 1]
-  );
+  const { id } = useParams<string>();
+  const { data, isLoading } = id
+    ? UseCharacter(id)
+    : { data: null, isLoading: true };
 
   return (
     <div>
       {!isLoading ? (
         <div>
+          <Breadcrumbs />
           <h1>{data.name}</h1>
           <h2>{data.birth_year}</h2>
           <h2>{data.height}</h2>
@@ -24,7 +21,7 @@ function Character() {
       ) : (
         <h1>Loading...</h1>
       )}
-      <button onClick={() => navigate(-1)}>Back</button>
+      <button onClick={() => navigate("./../../")}>Back</button>
     </div>
   );
 }

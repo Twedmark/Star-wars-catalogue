@@ -1,30 +1,28 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import routes from "../../api/routes";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+
 import CharacterCard from "../../components/CharacterCard/CharacterCard";
-import { useNavigate } from "react-router-dom";
+
+import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
+
+import UseMovie from "../../hooks/UseMovie";
 
 function Movie() {
   const location = useLocation();
   const navigate = useNavigate();
-  const [movieData, setMovieData] = useState<any>(null);
+  const [movieData, setMovieData] = useState<any>(location.state);
+  const { id } = useParams<string>();
+  const { data } = id ? UseMovie(id) : { data: null };
 
   useEffect(() => {
-    if (location.state) {
-      setMovieData(location.state);
-    } else {
-      console.log("no state, fetching data");
-      const id = location.pathname[location.pathname.length - 1];
-      routes.film(id).then((response: any) => {
-        setMovieData(response);
-      });
-    }
+    if (!movieData) setMovieData(data);
   }, []);
 
   return (
     <div>
       {movieData ? (
         <div>
+          <Breadcrumbs />
           <h1>{movieData.title}</h1>
           <h3>{movieData.director}</h3>
           <h3>{movieData.producer}</h3>
@@ -38,7 +36,7 @@ function Movie() {
             }}
           >
             {movieData?.characters.map((character: any) => (
-              <CharacterCard key={character} character={character} />
+              <CharacterCard key={character.name} character={character} />
             ))}
           </div>
 
@@ -47,7 +45,7 @@ function Movie() {
       ) : (
         <h1>Loading...</h1>
       )}
-      <button onClick={() => navigate(-1)}>Back</button>
+      <button onClick={() => navigate("./../../")}>Back</button>
     </div>
   );
 }
