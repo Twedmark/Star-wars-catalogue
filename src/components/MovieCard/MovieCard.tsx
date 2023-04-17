@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { Card } from "./styles";
+import { MovieType } from "../../utils/types";
 
-function MovieList(props: any) {
+function MovieList(props: { movie: MovieType }) {
   const { movie } = props;
   const navigate = useNavigate();
 
