@@ -21,8 +21,6 @@ function Movie() {
   const { id } = useParams<string>();
   const { data, isLoading } = UseMovieById(id ? id : "");
 
-  console.log(data);
-
   useEffect(() => {
     if (!movieData && data) setMovieData(data);
   }, [isLoading]);

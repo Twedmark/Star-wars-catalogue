@@ -1,8 +1,8 @@
 import { useParams, useNavigate } from "react-router-dom";
 
-import { Button, Container, CharacterInfo, MovieList } from "./styles";
-import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import { UseCharacter, UseMovieByUrl } from "../../hooks/UseQuery";
+import { Button, Container, CharacterSection, MovieList } from "./styles";
+import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 
 function Character() {
   const navigate = useNavigate();
@@ -33,13 +33,11 @@ function Character() {
     );
   };
 
-  console.log(data);
-
   return (
     <>
       <Breadcrumbs />
       <Container>
-        <CharacterInfo>
+        <CharacterSection>
           <h1>{data.name}</h1>
           <p>gender: {data.gender}</p>
           <p>height: {data.height}cm</p>
@@ -48,15 +46,15 @@ function Character() {
           <p>Eye Color: {data.eye_color}</p>
           <p>Hair Color: {data.hair_color}</p>
           <Button onClick={() => navigate("./../../")}>Back</Button>
-        </CharacterInfo>
-        <CharacterInfo>
+        </CharacterSection>
+        <CharacterSection>
           <p>Appears in {data.films.length} films: </p>
           <MovieList>
             {data?.films.map((film) => (
-              <Films Film={film} />
+              <Films key={film} Film={film} />
             ))}
           </MovieList>
-        </CharacterInfo>
+        </CharacterSection>
       </Container>
     </>
   );

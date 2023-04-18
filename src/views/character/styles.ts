@@ -20,7 +20,7 @@ export const Container = styled.div`
   gap: 1rem;
 `;
 
-export const CharacterInfo = styled.div`
+export const CharacterSection = styled.div`
   display: flex;
   flex-direction: column;
 `;
