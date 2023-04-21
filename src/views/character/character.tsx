@@ -35,7 +35,6 @@ function Character() {
 
   return (
     <>
-      <Breadcrumbs />
       <Container>
         <CharacterSection>
           <h1>{data.name}</h1>

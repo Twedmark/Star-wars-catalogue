@@ -16,7 +16,7 @@ function CharacterCard(props: { character: string }) {
 
   function handelOnClick() {
     const id = data?.url.split("/")[data.url.split("/").length - 2];
-    navigate(`character/${id}`, {
+    navigate(`${id}`, {
       state: character,
     });
   }

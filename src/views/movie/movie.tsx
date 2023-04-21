@@ -31,7 +31,6 @@ function Movie() {
 
   return (
     <div>
-      <Breadcrumbs />
       <MovieContainer>
         <MovieInfo>
           <h1>{movieData.title}</h1>
@@ -44,16 +43,19 @@ function Movie() {
           <p>{movieData.opening_crawl}</p>
           <Button onClick={() => navigate("./../../")}>Back</Button>
         </MovieInfo>
-        <MovieCharacters>
-          <h2>Characters:</h2>
+        <Button onClick={() => navigate(`characters`, { state: data })}>
+          To characters
+        </Button>
+        {/* <MovieCharacters> */}
+        {/* <h2>Characters:</h2>
           <CharacterList>
             {movieData?.characters.map(
               (characterURL: string, index: number) => (
                 <CharacterCard key={index} character={characterURL} />
               )
             )}
-          </CharacterList>
-        </MovieCharacters>
+          </CharacterList> */}
+        {/* </MovieCharacters> */}
       </MovieContainer>
     </div>
   );
