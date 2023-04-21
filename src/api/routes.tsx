@@ -1,53 +1,40 @@
-import { MovieType, CharacterType } from "../utils/types";
+import {
+  useFetchCharacter,
+  useFetchMovie,
+  useFetchMultiple,
+} from "../hooks/UseFetch";
+
 const BASE_URL = "https://swapi.dev/api/";
 
-type Routes = {
-  film: (id: string) => Promise<MovieType>;
-  filmByUrl: (URL: string) => Promise<MovieType>;
-  films: () => Promise<MovieType[]>;
-  character: (URL: string) => Promise<CharacterType>;
-  characterById: (id: string) => Promise<CharacterType>;
+const UseFilm = (id: string) => {
+  const URL = BASE_URL + "films/" + id + "/";
+  return useFetchMovie(URL);
 };
 
-const film = async (id: string) => {
-  const URL = BASE_URL + "films/" + id;
-  const response = await fetch(URL);
-  const data = await response.json();
-  return data;
-};
-
-const filmByUrl = async (URL: string) => {
-  const response = await fetch(URL);
-  const data = await response.json();
-  return data;
-};
-
-const films = async () => {
+const UseFilms = () => {
   const URL = BASE_URL + "films/";
-  const response = await fetch(URL);
-  const data = await response.json();
-  return data.results;
+  return useFetchMultiple(URL);
 };
 
-const character = async (URL: string) => {
-  const response = await fetch(URL);
-  const data = await response.json();
-  return data;
+const UseFilmByUrl = (URL: string) => {
+  return useFetchMovie(URL);
 };
 
-const characterById = async (id: string) => {
+const UseCharacter = (id: string) => {
   const URL = BASE_URL + "people/" + id;
-  const response = await fetch(URL);
-  const data = await response.json();
-  return data;
+  return useFetchCharacter(URL);
 };
 
-const routes: Routes = {
-  film,
-  filmByUrl,
-  films,
-  character,
-  characterById,
+const UseCharacterByUrl = (URL: string) => {
+  return useFetchCharacter(URL);
+};
+
+const routes = {
+  UseFilm,
+  UseFilms,
+  UseFilmByUrl,
+  UseCharacter,
+  UseCharacterByUrl,
 };
 
 // async function getAllPages(url: string) {

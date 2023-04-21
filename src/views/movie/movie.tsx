@@ -10,8 +10,8 @@ import {
 } from "./styles";
 import CharacterCard from "../../components/CharacterCard/CharacterCard";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
-import { UseMovieById } from "../../hooks/UseQuery";
 import { MovieType } from "../../utils/types";
+import routes from "../../api/routes";
 
 function Movie() {
   const location = useLocation();
@@ -19,13 +19,13 @@ function Movie() {
 
   const [movieData, setMovieData] = useState<MovieType>(location.state);
   const { id } = useParams<string>();
-  const { data, isLoading } = UseMovieById(id ? id : "");
+  const { status, data } = routes.UseFilm(id ? id : "");
 
   useEffect(() => {
-    if (!movieData && data) setMovieData(data);
-  }, [isLoading]);
+    if (data) setMovieData(data);
+  }, [data]);
 
-  if (isLoading || !movieData) {
+  if (!movieData) {
     return <h1>Loading...</h1>;
   }
 

@@ -1,14 +1,16 @@
 import { useNavigate } from "react-router-dom";
-import { UseCharacterUrl } from "../../hooks/UseQuery";
+
+import routes from "../../api/routes";
 
 import { CharacterCardContainer } from "./styles";
 
 function CharacterCard(props: { character: string }) {
   const { character } = props;
   const navigate = useNavigate();
-  let { data, isLoading } = UseCharacterUrl(character);
 
-  if (isLoading || !data) {
+  const { status, data } = routes.UseCharacterByUrl(character);
+
+  if (!data) {
     return <></>;
   }
 
@@ -25,7 +27,7 @@ function CharacterCard(props: { character: string }) {
         handelOnClick();
       }}
     >
-      <p>{data.name}</p>
+      <h3>{data.name}</h3>
     </CharacterCardContainer>
   );
 }

@@ -1,23 +1,23 @@
 import { useParams, useNavigate } from "react-router-dom";
 
-import { UseCharacter, UseMovieByUrl } from "../../hooks/UseQuery";
 import { Button, Container, CharacterSection, MovieList } from "./styles";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
+import routes from "../../api/routes";
 
 function Character() {
   const navigate = useNavigate();
   const { id } = useParams<string>();
-  const { data, isLoading } = UseCharacter(id ? id : "");
+  const { status, data } = routes.UseCharacter(id ? id : "");
 
-  if (isLoading || !data) {
-    return <h1>Loading...</h1>;
+  if (!data) {
+    return <h1>{status}</h1>;
   }
 
   const Films = ({ Film }: { Film: string }) => {
-    const { data, isLoading } = UseMovieByUrl(Film);
+    const { status, data } = routes.UseFilmByUrl(Film);
 
-    if (isLoading || !data) {
-      return <h1>Loading...</h1>;
+    if (!data) {
+      return <h1>{status}</h1>;
     }
 
     return (
