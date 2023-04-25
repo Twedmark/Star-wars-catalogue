@@ -28,6 +28,8 @@ const useFetchMovie = (url: string) => {
   const [status, setStatus] = useState("idle");
   const [data, setData] = useState<MovieType>();
 
+  console.log(cache);
+
   useEffect(() => {
     if (!url) return;
 
@@ -35,12 +37,13 @@ const useFetchMovie = (url: string) => {
       setStatus("Loading...");
       if (cache.Movie[url]) {
         const data = cache.Movie[url];
+        cacheAllCharactersFromMovie(data);
         setData(data);
         setStatus("fetched");
       } else {
         const response = await fetch(url);
         const data = await response.json();
-
+        cacheAllCharactersFromMovie(data);
         cache.Movie[url] = data;
         setData(data);
         setStatus("fetched");
@@ -52,6 +55,18 @@ const useFetchMovie = (url: string) => {
 
   return { status, data };
 };
+
+function cacheAllCharactersFromMovie(movie: MovieType) {
+  movie.characters.forEach((url) => {
+    if (!cache.Character[url]) {
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          cache.Character[url] = data;
+        });
+    }
+  });
+}
 
 const useFetchCharacter = (url: string) => {
   const [status, setStatus] = useState("idle");
@@ -81,6 +96,10 @@ const useFetchCharacter = (url: string) => {
   }, [url]);
 
   return { status, data };
+};
+
+const useGetAllCachedCharacters = () => {
+  return Object.values(cache.Character);
 };
 
 const useFetchMultiple = (url: string) => {
@@ -116,4 +135,9 @@ const useFetchMultiple = (url: string) => {
   return { status, data };
 };
 
-export { useFetchMovie, useFetchCharacter, useFetchMultiple };
+export {
+  useFetchMovie,
+  useFetchCharacter,
+  useGetAllCachedCharacters,
+  useFetchMultiple,
+};

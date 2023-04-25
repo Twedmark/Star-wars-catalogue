@@ -1,5 +1,34 @@
 import styled from "styled-components";
 
+export const MovieContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 0 1rem;
+  gap: 2rem;
+
+  & > h1 {
+    grid-column: span 2;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    & > h1 {
+      grid-column: span 1;
+    }
+  }
+`;
+
+export const MovieInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  /* & > p {
+    border-top: 1px solid darkgray;
+    margin: 0;
+    padding: 1rem 0;
+  } */
+`;
+
 export const Button = styled.button`
   background-color: rgb(179, 179, 179);
   max-width: 8rem;
@@ -11,27 +40,4 @@ export const Button = styled.button`
   &:hover {
     background-color: rgb(117, 117, 117);
   }
-`;
-
-export const MovieContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  padding: 1rem;
-  gap: 1rem;
-`;
-
-export const MovieInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-export const MovieCharacters = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-export const CharacterList = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 1rem;
 `;

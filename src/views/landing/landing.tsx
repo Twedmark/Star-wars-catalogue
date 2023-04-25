@@ -6,9 +6,6 @@ import { MovieType } from "../../utils/types";
 function LandingPage() {
   const { status, data } = routes.UseFilms();
 
-  console.log(status);
-  console.log(data);
-
   if (!data) {
     return <>{status}</>;
   }

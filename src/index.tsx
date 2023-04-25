@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "./index.css";
 
@@ -8,7 +8,7 @@ import LandingPage from "./views/landing/landing";
 import Movie from "./views/movie/movie";
 import Character from "./views/character/character";
 import Characters from "./views/characters/characters";
-import Breadcrumbs from "./components/Breadcrumbs/Breadcrumbs";
+import Breadcrumbs from "./components/Navbar/Navbar";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -16,19 +16,28 @@ const root = ReactDOM.createRoot(
 
 const routes = [
   {
-    path: "/",
+    path: "/*",
+    name: "Movies",
     main: () => <LandingPage />,
   },
   {
-    path: "/movie/:id",
+    path: "/movies",
+    name: "Movies",
+    main: () => <LandingPage />,
+  },
+  {
+    path: "/movies/:id",
+    name: "Movie",
     main: () => <Movie />,
   },
   {
-    path: "/movie/:id/characters",
+    path: "/characters",
+    name: "Characters",
     main: () => <Characters />,
   },
   {
-    path: "/movie/:id/characters/:id",
+    path: "characters/:id",
+    name: "Character",
     main: () => <Character />,
   },
 ];
@@ -36,7 +45,7 @@ const routes = [
 root.render(
   <StrictMode>
     <BrowserRouter>
-      <Breadcrumbs routes={routes} />
+      <Breadcrumbs />
       <Routes>
         {routes.map(({ path, main }) => (
           <Route key={path} path={path} element={main()} />

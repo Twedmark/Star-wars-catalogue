@@ -1,32 +1,22 @@
-import { useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-
 import CharacterCard from "../../components/CharacterCard/CharacterCard";
 
-import { CharacterType, MovieType } from "../../utils/types";
-import routes from "../../api/routes";
+import { CharactersContainer } from "./styles";
+import { useGetAllCachedCharacters } from "../../hooks/UseFetch";
 
-function Movie() {
-  const location = useLocation();
-  const [movieData, setMovieData] = useState<MovieType>(location.state);
-  const { id } = useParams<string>();
-  const { status, data } = routes.UseFilm(id ? id : "");
+function Characters() {
+  const characterData = useGetAllCachedCharacters();
 
-  useEffect(() => {
-    if (data) setMovieData(data);
-  }, [data]);
-
-  if (!movieData) {
-    return <h1>Loading...</h1>;
+  if (characterData.length <= 0) {
+    return <h1>Visit a movie first</h1>;
   }
 
   return (
-    <div>
-      {movieData?.characters.map((characterURL: string, index: number) => (
-        <CharacterCard key={index} character={characterURL} />
+    <CharactersContainer>
+      {characterData.map((character) => (
+        <CharacterCard key={character.name} character={character} />
       ))}
-    </div>
+    </CharactersContainer>
   );
 }
 
-export default Movie;
+export default Characters;

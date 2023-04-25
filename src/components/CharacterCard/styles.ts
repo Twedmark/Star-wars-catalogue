@@ -5,8 +5,10 @@ export const CharacterCardContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: rgb(127, 136, 154);
+  background-color: rgb(34, 35, 36);
+  color: white;
   &:hover {
-    background-color: rgb(117, 117, 117);
+    transform: scale(1.05);
+    background-color: rgb(59 80 95);
   }
 `;

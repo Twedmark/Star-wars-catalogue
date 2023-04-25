@@ -3,10 +3,9 @@ import styled from "styled-components";
 export const Card = styled.div`
   display: flex;
   flex-direction: column;
-
-  justify-content: center;
+  justify-content: space-between;
   text-align: center;
-  background: #f0f0f5;
+  background: #d5d5d5;
   padding: 1rem;
   border-radius: 1rem;
   aspect-ratio: 3.2/5;
@@ -16,4 +15,8 @@ export const Card = styled.div`
   &:hover {
     transform: scale(1.05);
   }
+`;
+
+export const Title = styled.h2`
+  font-size: 1.5rem;
 `;
