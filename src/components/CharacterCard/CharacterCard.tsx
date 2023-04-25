@@ -1,20 +1,15 @@
 import { useNavigate } from "react-router-dom";
-import { UseCharacterUrl } from "../../hooks/UseQuery";
 
 import { CharacterCardContainer } from "./styles";
+import { CharacterType } from "../../utils/types";
 
-function CharacterCard(props: { character: string }) {
+function CharacterCard(props: { character: CharacterType }) {
   const { character } = props;
   const navigate = useNavigate();
-  let { data, isLoading } = UseCharacterUrl(character);
-
-  if (isLoading || !data) {
-    return <></>;
-  }
 
   function handelOnClick() {
-    const id = data?.url.split("/")[data.url.split("/").length - 2];
-    navigate(`character/${id}`, {
+    const id = character.url.split("/")[character.url.split("/").length - 2];
+    navigate(`${id}`, {
       state: character,
     });
   }
@@ -25,7 +20,7 @@ function CharacterCard(props: { character: string }) {
         handelOnClick();
       }}
     >
-      <p>{data.name}</p>
+      <h4>{character.name}</h4>
     </CharacterCardContainer>
   );
 }

@@ -33,3 +33,19 @@ export type CharacterType = {
   url: string;
   vehicles: string[];
 };
+
+export type cacheType = {
+  Movie: { [key: string]: MovieType };
+  Character: { [key: string]: CharacterType };
+};
+
+export type multipleMovies = {
+  count: number;
+  next: string;
+  previous: string;
+  results: MovieType[];
+};
+
+export type multipleCacheType = {
+  [key: string]: multipleMovies;
+};

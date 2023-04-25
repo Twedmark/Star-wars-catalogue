@@ -1,60 +1,41 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 
-import { UseCharacter, UseMovieByUrl } from "../../hooks/UseQuery";
-import { Button, Container, CharacterSection, MovieList } from "./styles";
-import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
+import routes from "../../api/routes";
+import { Button, Container, CharacterSection } from "./styles";
+import type { CharacterType } from "../../utils/types";
 
 function Character() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { id } = useParams<string>();
-  const { data, isLoading } = UseCharacter(id ? id : "");
+  const [characterData, setCharacterData] = useState<CharacterType>(
+    location.state
+  );
 
-  if (isLoading || !data) {
-    return <h1>Loading...</h1>;
+  if (!characterData) {
+    const { status, data } = routes.UseCharacter(id ? id : "");
+    if (data) setCharacterData(data);
+    return <h1>{status}</h1>;
   }
-
-  const Films = ({ Film }: { Film: string }) => {
-    const { data, isLoading } = UseMovieByUrl(Film);
-
-    if (isLoading || !data) {
-      return <h1>Loading...</h1>;
-    }
-
-    return (
-      <div>
-        <h2
-          onClick={() =>
-            navigate("/movie/" + data.url.split("/").slice(-2, -1)[0])
-          }
-        >
-          {data.title}
-        </h2>
-      </div>
-    );
-  };
 
   return (
     <>
-      <Breadcrumbs />
       <Container>
+        <h1>{characterData.name}</h1>
         <CharacterSection>
-          <h1>{data.name}</h1>
-          <p>gender: {data.gender}</p>
-          <p>height: {data.height}cm</p>
-          <p>Weight: {data.mass}kg</p>
-          <p>Birth Year: {data.birth_year}</p>
-          <p>Eye Color: {data.eye_color}</p>
-          <p>Hair Color: {data.hair_color}</p>
-          <Button onClick={() => navigate("./../../")}>Back</Button>
+          <p>Gender: {characterData.gender}</p>
+          <p>Birth year: {characterData.birth_year}</p>
+          <p>Height: {characterData.height}cm</p>
+          <p>Weight: {characterData.mass}kg</p>
         </CharacterSection>
         <CharacterSection>
-          <p>Appears in {data.films.length} films: </p>
-          <MovieList>
-            {data?.films.map((film) => (
-              <Films key={film} Film={film} />
-            ))}
-          </MovieList>
+          <p>Eye color: {characterData.eye_color}</p>
+          <p>Hair color: {characterData.hair_color}</p>
+          <p>skin color: {characterData.skin_color}</p>
+          <p>Appears in {characterData.films.length} films.</p>
         </CharacterSection>
+        <Button onClick={() => navigate("./../")}>Back</Button>
       </Container>
     </>
   );

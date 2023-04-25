@@ -5,8 +5,14 @@ export const CharacterCardContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: rgb(127, 136, 154);
+  border-radius: 1rem;
+  margin: 3px;
+  background-color: rgb(34, 35, 36);
+  color: white;
+
   &:hover {
-    background-color: rgb(117, 117, 117);
+    transform: scale(1.05);
+    box-shadow: 0px 0px 4px 2px #fade4b;
+    margin: 0px;
   }
 `;
