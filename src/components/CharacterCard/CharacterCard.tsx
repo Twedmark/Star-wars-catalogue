@@ -20,7 +20,7 @@ function CharacterCard(props: { character: CharacterType }) {
         handelOnClick();
       }}
     >
-      <h3>{character.name}</h3>
+      <h4>{character.name}</h4>
     </CharacterCardContainer>
   );
 }

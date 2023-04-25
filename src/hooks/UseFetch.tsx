@@ -1,21 +1,11 @@
 import { useState, useEffect } from "react";
-import type { MovieType, CharacterType } from "../utils/types";
-
-type cacheType = {
-  Movie: { [key: string]: MovieType };
-  Character: { [key: string]: CharacterType };
-};
-
-type multipleMovies = {
-  count: number;
-  next: string;
-  previous: string;
-  results: MovieType[];
-};
-
-type multipleCacheType = {
-  [key: string]: multipleMovies;
-};
+import type {
+  MovieType,
+  CharacterType,
+  cacheType,
+  multipleMovies,
+  multipleCacheType,
+} from "../utils/types";
 
 const cache: cacheType = {
   Movie: {},
@@ -27,8 +17,6 @@ const MultipleCache: multipleCacheType = {};
 const useFetchMovie = (url: string) => {
   const [status, setStatus] = useState("idle");
   const [data, setData] = useState<MovieType>();
-
-  console.log(cache);
 
   useEffect(() => {
     if (!url) return;

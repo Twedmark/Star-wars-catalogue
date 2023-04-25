@@ -5,7 +5,7 @@ function Navbar() {
   return (
     <NavbarContainer>
       <NavLink
-        to={`/`}
+        to={`/movies`}
         style={({ isActive }) => ({
           borderBottom: isActive ? "2px solid #FADE4B" : "",
         })}
@@ -25,5 +25,3 @@ function Navbar() {
 }
 
 export default Navbar;
-
-//boxShadow 0px 0px 4px 1px #FADE4B

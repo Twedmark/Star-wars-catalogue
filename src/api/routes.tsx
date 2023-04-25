@@ -6,14 +6,14 @@ import {
 
 const BASE_URL = "https://swapi.dev/api/";
 
-const UseFilm = (id: string) => {
-  const URL = BASE_URL + "films/" + id + "/";
-  return useFetchMovie(URL);
-};
-
 const UseFilms = () => {
   const URL = BASE_URL + "films/";
   return useFetchMultiple(URL);
+};
+
+const UseFilm = (id: string) => {
+  const URL = BASE_URL + "films/" + id + "/";
+  return useFetchMovie(URL);
 };
 
 const UseFilmByUrl = (URL: string) => {
@@ -30,8 +30,8 @@ const UseCharacterByUrl = (URL: string) => {
 };
 
 const routes = {
-  UseFilm,
   UseFilms,
+  UseFilm,
   UseFilmByUrl,
   UseCharacter,
   UseCharacterByUrl,

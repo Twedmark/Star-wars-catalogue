@@ -3,15 +3,18 @@ import styled from "styled-components";
 export const MovieContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  padding: 0 1rem;
+  padding: 0 6%;
   gap: 2rem;
 
   & > h1 {
     grid-column: span 2;
+    justify-self: center;
+    text-decoration: underline;
   }
 
   @media (max-width: 480px) {
     grid-template-columns: 1fr;
+
     & > h1 {
       grid-column: span 1;
     }
@@ -21,12 +24,6 @@ export const MovieContainer = styled.div`
 export const MovieInfo = styled.div`
   display: flex;
   flex-direction: column;
-
-  /* & > p {
-    border-top: 1px solid darkgray;
-    margin: 0;
-    padding: 1rem 0;
-  } */
 `;
 
 export const Button = styled.button`

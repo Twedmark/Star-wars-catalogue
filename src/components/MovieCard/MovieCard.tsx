@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Card, Title } from "./styles";
+import { Card } from "./styles";
 import { MovieType } from "../../utils/types";
 
 function MovieCard(props: { movie: MovieType }) {
@@ -7,13 +7,12 @@ function MovieCard(props: { movie: MovieType }) {
   const navigate = useNavigate();
 
   function handleOnClick() {
-    console.log(movie);
     navigate(`/movies/${movie.url[movie.url.length - 2]}`, { state: movie });
   }
 
   return (
     <Card onClick={handleOnClick}>
-      <Title>{movie.title}</Title>
+      <h2>{movie.title}</h2>
       <p>({movie.release_date.split("-")[0]})</p>
     </Card>
   );

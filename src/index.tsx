@@ -3,12 +3,11 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "./index.css";
-
 import LandingPage from "./views/landing/landing";
 import Movie from "./views/movie/movie";
 import Character from "./views/character/character";
 import Characters from "./views/characters/characters";
-import Breadcrumbs from "./components/Navbar/Navbar";
+import Navbar from "./components/Navbar/Navbar";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -45,7 +44,7 @@ const routes = [
 root.render(
   <StrictMode>
     <BrowserRouter>
-      <Breadcrumbs />
+      <Navbar />
       <Routes>
         {routes.map(({ path, main }) => (
           <Route key={path} path={path} element={main()} />

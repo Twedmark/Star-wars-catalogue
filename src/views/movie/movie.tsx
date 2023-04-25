@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 import { MovieContainer, MovieInfo, Button } from "./styles";
-
 import { MovieType } from "../../utils/types";
 import routes from "../../api/routes";
 
@@ -23,14 +22,14 @@ function Movie() {
     <MovieContainer>
       <h1>{movieData.title}</h1>
       <MovieInfo>
-        <h4>Movie info</h4>
+        <h3>Movie info</h3>
         <p>Director: {movieData.director}</p>
         <p>Producer: {movieData.producer}</p>
         <p>Release Date: {movieData.release_date}</p>
         <p>Episode: {movieData.episode_id}</p>
       </MovieInfo>
       <MovieInfo>
-        <h4>Opening Crawl:</h4>
+        <h3>Opening Crawl:</h3>
         <p>{movieData.opening_crawl}</p>
       </MovieInfo>
       <Button onClick={() => navigate("./../../")}>Back</Button>

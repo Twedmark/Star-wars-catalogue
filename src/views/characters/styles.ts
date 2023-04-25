@@ -2,7 +2,15 @@ import styled from "styled-components";
 
 export const CharactersContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 1rem;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1.5rem;
   padding: 1rem;
+
+  @media (max-width: 770px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
 `;

@@ -8,15 +8,11 @@ export const Card = styled.div`
   background: #d5d5d5;
   padding: 1rem;
   border-radius: 1rem;
-  aspect-ratio: 3.2/5;
+  aspect-ratio: 3.5/5;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   transition: transform 0.2s;
 
   &:hover {
     transform: scale(1.05);
   }
-`;
-
-export const Title = styled.h2`
-  font-size: 1.5rem;
 `;
